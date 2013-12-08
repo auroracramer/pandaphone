@@ -49,7 +49,7 @@ class KeySignature(object):
 # A class that represents a musical note, and contains all information regarding
 # itself
 class Note(object):
-  def __init__(self, time, note, duration, velocity, prev=None, key=None, tempo=None, gesture=None):
+  def __init__(self, time, note, duration, velocity, prev=None, key=None, time_signature=None, tempo=None, gesture=None):
     self.time = time              # The time at which a note is played
     self.note = note              # The note being played
     self.key = key                # The key signature when the note was played
@@ -60,6 +60,7 @@ class Note(object):
     self.gesture = gesture        # The gesture with which the note was played
     self.octave = note // 12      # The octave of the note being played
     self.degree = note %  12      # The degree of the note being played
+    self.time_signature = time_signature
 
 # for now, we will make the simplification that chords
 # are sequences of notes
@@ -113,9 +114,13 @@ def process_pattern(pattern):
         key_signature_events[event.tick] = KeySignature(event.alternatives, event.minor)
       elif isinstance(event, midi.SetTempoEvent):
         tempo_events[event.tick] = event.bpm
-  # Second pass: Go through and assign previous notes
+  # Second pass: Go through and assign previous notes, and add tempo, key signature
+  #              and time signature
   for track in tracks:
     for index, note in enumerate(track):
+      note.key = key_signature_events[note.time]
+      note.time_signature = time_signature_events[note.time]
+      note.tempo = tempo_events[note.time]
       if index == 0:
         continue
       # If the previous note was at a previous time, the decision is easy
@@ -132,12 +137,6 @@ def process_pattern(pattern):
         if j >= 0:
           note.prev = track[j]
         # and if we find none, we leave prev as None
-
-  # Third pass: now we reconcile the events with the notes
-  for track in tracks:
-    for note in track:
-      note.key = key_signature_events[note.time]
-      note.tempo = tempo_events[note.time]
 
   # Return a flattened list of all of the notes
   return [note for track in tracks for note in track]
