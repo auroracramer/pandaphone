@@ -65,7 +65,8 @@ class Note(object):
 # for now, we will make the simplification that chords
 # are sequences of notes
 # Or we could have it so
-def process_pattern(pattern):
+def get_notes_from_MIDI(midi_filepath):
+  pattern = midi.read_midifile(midi_filepath)
   pattern.make_ticks_abs()
   ppq = pattern.resolution
 
