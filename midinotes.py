@@ -41,6 +41,10 @@ class KeySignature(object):
   def __init__(self, key, scale):
     # positve key = sharps, negative key = flats
     # 0 scale = major, 1 scale = minor
+    if key < -7: key = -7
+    if key > 7: key = 7
+    if scale < 0: scale = 0
+    if scale > 1: scale = 1
     self.key = KeySignature.key_signatures[(key,scale)]
 
 
@@ -66,14 +70,17 @@ class Note(object):
 # are sequences of notes
 # Or we could have it so
 def get_notes_from_MIDI(midi_filepath):
-  pattern = midi.read_midifile(midi_filepath)
+  try:
+    pattern = midi.read_midifile(midi_filepath)
+  except:
+    return []
   pattern.make_ticks_abs()
   ppq = pattern.resolution
 
   tracks = [[]] * len(pattern)
-  time_signature_events = ForwardFillSeries()
-  key_signature_events = ForwardFillSeries()
-  tempo_events = ForwardFillSeries()
+  time_signature_events = ForwardFillSeries(default_val = TimeSignature(4,4))
+  key_signature_events = ForwardFillSeries(default_val = KeySignature(0,0))
+  tempo_events = ForwardFillSeries(default_val = 120)
 
   activeNotes = dict()
   # First pass: Compile all notes and seperate out all other relevent midi events
@@ -100,7 +107,8 @@ def get_notes_from_MIDI(midi_filepath):
             del activeNotes[event.pitch]
       elif isinstance(event, midi.NoteOffEvent):
         if event.pitch not in activeNotes:
-          raise Exception("NoteOff event with no corresponding NoteOn!")
+          pass
+          #print "NoteOff event with no corresponding NoteOn! :("
         else:
           start = activeNotes[event.pitch]
           end = event
@@ -138,6 +146,5 @@ def get_notes_from_MIDI(midi_filepath):
         if j >= 0:
           note.prev = track[j]
         # and if we find none, we leave prev as None
-
   # Return a flattened list of all of the notes
   return [note for track in tracks for note in track]
