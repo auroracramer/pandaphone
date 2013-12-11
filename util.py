@@ -28,13 +28,18 @@ class ForwardFillSeries(UserDict.DictMixin):
   comes before is used. Used primarily when observing global state that changes
   over time to see what the particular state is at a given time.
   """
-  def __init__(self, init_dict = OrderedDict()):
+  def __init__(self, init_dict = OrderedDict(), default_val = None):
     self.items = init_dict
+    self.default_val = default_val
+
   def __getitem__(self, key):
     keys = self.items.keys()
     index = bisect.bisect_right(keys, key) - 1
     if index < 0:
-      raise KeyError(str(key) + " : Provided key is before any valid point.")
+      if self.default_val:
+        return self.default_val
+      else:
+        raise KeyError(str(key) + " : Provided key is before any valid point.")
     return self.items[keys[index]]
   def __setitem__(self, key, value):
     keys = self.items.keys()
