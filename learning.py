@@ -45,7 +45,7 @@ class NoteProbabilityDistributions(object):
       if note.prev:
         deg["prev_degree"][(curr_deg, note.prev.degree)] += 1
         deg["prev_duration"][(curr_deg, note.prev.duration)] += 1
-        dur["prev_degree"][(curr_dur, note.prev,degree)] += 1
+        dur["prev_degree"][(curr_dur, note.prev.degree)] += 1
         dur["prev_duration"][(curr_dur, note.prev.duration)] += 1
 
       deg["velocity"][(curr_deg, note.velocity)] += 1
@@ -107,15 +107,15 @@ class NoteProbabilityDistributions(object):
           "velocity" : {}, \
           "tempo" : {}}}
     for i in range(12):
-      output_dict["degree"]["prev_degree"][i] = get_cond_distr(self.degree_distrs, i)
-      output_dict["duration"]["prev_degree"][i] = get_cond_distr(self.duration_distrs, i)
+      output_dict["degree"]["prev_degree"][i] = get_cond_distr(self.degree_distrs["prev_degree"], i)
+      output_dict["duration"]["prev_degree"][i] = get_cond_distr(self.duration_distrs["prev_degree"], i)
     for d in [32, 16, 8, 4, 2, 1]:
-      output_dict["degree"]["prev_duration"][d] = get_cond_distr(self.degree_distrs, d)
-      output_dict["duration"]["prev_duration"][d] = get_cond_distr(self.duration_distrs, d)
+      output_dict["degree"]["prev_duration"][d] = get_cond_distr(self.degree_distrs["prev_duration"], d)
+      output_dict["duration"]["prev_duration"][d] = get_cond_distr(self.duration_distrs["prev_duration"], d)
     for t in range(10):
-      output_dict["degree"]["tempo"][t] = get_cond_distr(self.degree_distrs, t)
-      output_dict["duration"]["tempo"][t] = get_cond_distr(self.duration_distrs, t)
+      output_dict["degree"]["tempo"][t] = get_cond_distr(self.degree_distrs["tempo"], t)
+      output_dict["duration"]["tempo"][t] = get_cond_distr(self.duration_distrs["tempo"], t)
     for v in range(10):
-      output_dict["degree"]["velocity"][v] = get_cond_distr(self.degree_distrs, v)
-      output_dict["duration"]["velocity"][v] = get_cond_distr(self.duration_distrs, v)
+      output_dict["degree"]["velocity"][v] = get_cond_distr(self.degree_distrs["velocity"], v)
+      output_dict["duration"]["velocity"][v] = get_cond_distr(self.duration_distrs["velocity"], v)
     return json.dumps(output_dict)
