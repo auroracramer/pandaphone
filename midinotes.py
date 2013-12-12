@@ -53,18 +53,26 @@ class KeySignature(object):
 # A class that represents a musical note, and contains all information regarding
 # itself
 class Note(object):
-  def __init__(self, time, note, duration, velocity, prev=None, key=None, time_signature=None, tempo=None, gesture=None):
+  def __init__(self, time, pitch, duration, velocity, prev=None, key=None, time_signature=None, tempo=None, gesture=None):
     self.time = time              # The time at which a note is played
-    self.note = note              # The note being played
+    self.pitch = pitch            # The note being played
     self.key = key                # The key signature when the note was played
     self.duration = duration      # The duration of the note
     self.tempo = tempo            # The tempo when the note was played
     self.velocity = velocity      # The velocity at which the note was played
     self.prev = prev              # The previous note played
     self.gesture = gesture        # The gesture with which the note was played
-    self.octave = note // 12      # The octave of the note being played
-    self.degree = note %  12      # The degree of the note being played
+    self.octave = pitch // 12 - 1 # The octave of the note being played
+    self.degree = pitch %  12     # The degree of the note being played
     self.time_signature = time_signature
+
+def validate_note(note):
+  valid_pitch = (note.pitch < 128) and (note.pitch >= 0)
+  valid_velocity = (note.velocity < 128) and (note.velocity >= 0)
+  valid_degree = (note.degree < 12) and (note.degree >= 0)
+  valid_duration = (note.duration in [1,2,4,8,16,32])
+  #if (valid_pitch and valid_velocity): print True
+  return (valid_pitch and valid_velocity and valid_degree and valid_duration)
 
 # for now, we will make the simplification that chords
 # are sequences of notes
@@ -100,7 +108,8 @@ def get_notes_from_MIDI(midi_filepath):
           end = event
           duration = int(4.0*(end.tick - start.tick)/ppq)
           note = Note(start.tick, start.pitch, duration, start.velocity)
-          tracks[index].append(note)
+          if validate_note(note):
+            tracks[index].append(note)
           if event.velocity != 0:
             activeNotes[event.pitch] = event
           else:
@@ -114,7 +123,8 @@ def get_notes_from_MIDI(midi_filepath):
           end = event
           duration = end.tick - start.tick
           note = Note(start.tick, start.pitch, duration, start.velocity)
-          tracks[index].append(note)
+          if validate_note(note):
+            tracks[index].append(note)
           del activeNotes[event.pitch]
       # Add non-note events to their respective lists
       elif isinstance(event, midi.TimeSignatureEvent):
