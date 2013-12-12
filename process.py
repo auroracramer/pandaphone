@@ -22,11 +22,11 @@ def listMIDIFiles(directory):
 
 def learn(directory, outputFilepath):
   print "Gathering all MIDI files..."
-  files = listMIDIFiles(directory)
+  files = listMIDIFiles(directory)[:100]
   print "Processing MIDI files..."
   notes = process_files(files)
   print "Learning from data..."
-  distrs = NoteProbabilityDistributions(notes)
+  distrs = learning.NoteProbabilityDistributions(notes)
   print "Outputing JSON file..."
   jsonOutput = distrs.toJSON()
   f = open(outputFilepath, "w")
