@@ -43,15 +43,20 @@ class NoteProbabilityDistributions(object):
       curr_deg = note.degree
       curr_dur = note.duration
       if note.prev:
-        deg["prev_degree"][(curr_deg, note.prev.degree)] += 1
-        deg["prev_duration"][(curr_deg, note.prev.duration)] += 1
-        dur["prev_degree"][(curr_dur, note.prev.degree)] += 1
-        dur["prev_duration"][(curr_dur, note.prev.duration)] += 1
+        prev_degree = note.prev.degree
+        prev_duration = note.prev.duration
+        deg["prev_degree"][(curr_deg, prev_degree)] += 1
+        deg["prev_duration"][(curr_deg, prev_duration)] += 1
+        dur["prev_degree"][(curr_dur, prev_degree)] += 1
+        dur["prev_duration"][(curr_dur, prev_duration)] += 1
 
-      deg["velocity"][(curr_deg, note.velocity)] += 1
-      deg["tempo"][(curr_deg, note.tempo)] += 1
-      deg["velocity"][(curr_deg, note.velocity)] += 1
-      deg["tempo"][(curr_deg, note.tempo)] += 1
+      binned_velocity = int(note.velocity/12.8)
+      binned_tempo = int(note.tempo/30)
+
+      deg["velocity"][(curr_deg, binned_velocity)] += 1
+      deg["tempo"][(curr_deg, binned_tempo)] += 1
+      dur["velocity"][(curr_dur, binned_velocity)] += 1
+      dur["tempo"][(curr_dur, binned_tempo)] += 1
 
     self.normalize()
 
@@ -118,4 +123,5 @@ class NoteProbabilityDistributions(object):
     for v in range(10):
       output_dict["degree"]["velocity"][v] = get_cond_distr(self.degree_distrs["velocity"], v)
       output_dict["duration"]["velocity"][v] = get_cond_distr(self.duration_distrs["velocity"], v)
+
     return json.dumps(output_dict)
