@@ -33,7 +33,7 @@
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 203.0, 297.0, 25.0, 25.0 ]
+					"patching_rect" : [ 29.0, 172.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -45,7 +45,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 203.0, 146.0, 25.0, 25.0 ]
+					"patching_rect" : [ 29.0, 21.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -59,7 +59,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "float" ],
-					"patching_rect" : [ 203.0, 251.0, 56.0, 20.0 ],
+					"patching_rect" : [ 29.0, 126.0, 56.0, 20.0 ],
 					"sig" : 0.0
 				}
 
@@ -73,7 +73,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 203.0, 211.0, 60.0, 20.0 ],
+					"patching_rect" : [ 29.0, 86.0, 60.0, 20.0 ],
 					"text" : "onepole~"
 				}
 
@@ -87,7 +87,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 203.0, 231.0, 61.0, 20.0 ],
+					"patching_rect" : [ 29.0, 106.0, 61.0, 20.0 ],
 					"text" : "average~"
 				}
 
@@ -101,7 +101,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 203.0, 190.0, 33.0, 20.0 ],
+					"patching_rect" : [ 29.0, 65.0, 33.0, 20.0 ],
 					"text" : "sig~"
 				}
 

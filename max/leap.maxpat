@@ -7,7 +7,7 @@
 			"revision" : 4
 		}
 ,
-		"rect" : [ 0.0, 48.0, 827.0, 463.0 ],
+		"rect" : [ 0.0, 48.0, 827.0, 593.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -30,13 +30,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-28",
-					"maxclass" : "o.message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 535.0, 188.0, 150.0, 20.0 ],
-					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"id" : "obj-14",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 381.0, 297.0, 150.0, 34.0 ],
+					"text" : "Smooth datastreams so it things are less sporadic"
 				}
 
 			}
@@ -44,13 +44,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-27",
+					"id" : "obj-34",
 					"maxclass" : "newobj",
-					"numinlets" : 3,
+					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 466.0, 156.0, 129.0, 20.0 ],
-					"text" : "o.pack /pitch /roll /yaw"
+					"patching_rect" : [ 62.5, 415.0, 381.0, 20.0 ],
+					"text" : "o.expr /binnedSpeed = floor(clip( scale( /speed \\, 50\\, 1500\\, 1\\, 9)\\, 1\\, 9))"
 				}
 
 			}
@@ -58,13 +58,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-13",
+					"id" : "obj-29",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
-					"numoutlets" : 4,
-					"outlettype" : [ "", "", "", "FullPacket" ],
-					"patching_rect" : [ 431.5, 94.0, 357.0, 20.0 ],
-					"text" : "o.route /hand/leftmost/pitch /hand/leftmost/roll /hand/leftmost/yaw"
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "FullPacket" ],
+					"patching_rect" : [ 62.5, 392.0, 409.0, 20.0 ],
+					"text" : "o.expr /binnedVelocity = floor(clip( scale( /sphereSize \\, 50\\, 100\\, 1\\, 9)\\, 1\\, 9))"
 				}
 
 			}
@@ -72,13 +72,13 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-16",
-					"maxclass" : "flonum",
+					"id" : "obj-12",
+					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "float", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 519.0, 378.0, 50.0, 20.0 ]
+					"numoutlets" : 1,
+					"outlettype" : [ "FullPacket" ],
+					"patching_rect" : [ 62.5, 370.0, 369.0, 20.0 ],
+					"text" : "o.expr /binnedTempo = floor(clip( scale( /height \\, 0\\, 500\\, 1\\, 9)\\, 1\\, 9))"
 				}
 
 			}
@@ -91,7 +91,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 447.5, 399.0, 50.0, 20.0 ],
+					"patching_rect" : [ 316.5, 311.0, 50.0, 20.0 ],
 					"text" : "smooth"
 				}
 
@@ -105,8 +105,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 155.5, 216.0, 368.0, 20.0 ],
-					"text" : "o.expr /panda/roll = scale( abs( /hand/leftmost/yaw )\\, 0\\, pi() \\, 0\\, 1.0)"
+					"patching_rect" : [ 24.5, 128.0, 373.0, 20.0 ],
+					"text" : "o.expr /panda/yaw = scale( abs( /hand/leftmost/yaw )\\, 0\\, pi() \\, 0\\, 1.0)"
 				}
 
 			}
@@ -119,8 +119,8 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 262.0, 426.0, 214.0, 20.0 ],
-					"text" : "o.pack /speed /height /sphereSize /roll"
+					"patching_rect" : [ 131.0, 338.0, 219.0, 20.0 ],
+					"text" : "o.pack /speed /height /sphereSize /yaw"
 				}
 
 			}
@@ -133,7 +133,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 381.0, 399.0, 50.0, 20.0 ],
+					"patching_rect" : [ 250.0, 311.0, 50.0, 20.0 ],
 					"text" : "smooth"
 				}
 
@@ -147,7 +147,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 324.0, 399.0, 50.0, 20.0 ],
+					"patching_rect" : [ 193.0, 311.0, 50.0, 20.0 ],
 					"text" : "smooth"
 				}
 
@@ -161,7 +161,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 193.5, 436.0, 50.0, 20.0 ],
+					"patching_rect" : [ 62.5, 348.0, 50.0, 20.0 ],
 					"text" : "o.union"
 				}
 
@@ -175,8 +175,8 @@
 					"numinlets" : 5,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "FullPacket" ],
-					"patching_rect" : [ 155.5, 364.0, 216.0, 20.0 ],
-					"text" : "o.route /speed /height /sphereSize /roll"
+					"patching_rect" : [ 24.5, 276.0, 221.0, 20.0 ],
+					"text" : "o.route /speed /height /sphereSize /yaw"
 				}
 
 			}
@@ -189,19 +189,19 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "float" ],
-					"patching_rect" : [ 262.0, 399.0, 50.0, 20.0 ],
+					"patching_rect" : [ 131.0, 311.0, 50.0, 20.0 ],
 					"text" : "smooth"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(OSC) Relevant information from the Leap Motion",
 					"id" : "obj-11",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 155.5, 399.0, 25.0, 25.0 ]
+					"patching_rect" : [ 62.5, 443.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -214,7 +214,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 155.5, 308.0, 342.0, 20.0 ],
+					"patching_rect" : [ 24.5, 220.0, 342.0, 20.0 ],
 					"text" : "o.expr /panda/sphereSize = /hand/leftmost/palm/sphere/radius"
 				}
 
@@ -228,7 +228,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 155.5, 280.0, 324.0, 20.0 ],
+					"patching_rect" : [ 24.5, 192.0, 324.0, 20.0 ],
 					"text" : "o.expr /panda/height = /hand/leftmost/palm/sphere/center/y"
 				}
 
@@ -243,20 +243,20 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 155.5, 246.0, 597.0, 34.0 ],
+					"patching_rect" : [ 24.5, 158.0, 597.0, 34.0 ],
 					"text" : "o.expr /panda/speed = sqrt( pow(/hand/leftmost/palm/velocity/x \\, 2) + pow(/hand/leftmost/palm/velocity/y \\, 2) + pow(/hand/leftmost/palm/velocity/z \\, 2))"
 				}
 
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "toggle: Enable Leap Motion tracking",
 					"id" : "obj-1",
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 155.5, 65.0, 25.0, 25.0 ]
+					"patching_rect" : [ 24.5, 22.0, 25.0, 25.0 ]
 				}
 
 			}
@@ -269,7 +269,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "FullPacket" ],
-					"patching_rect" : [ 155.5, 338.0, 88.0, 20.0 ],
+					"patching_rect" : [ 24.5, 250.0, 88.0, 20.0 ],
 					"text" : "o.route /panda"
 				}
 
@@ -283,7 +283,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 155.5, 176.0, 51.0, 20.0 ],
+					"patching_rect" : [ 24.5, 88.0, 51.0, 20.0 ],
 					"text" : "metro 1"
 				}
 
@@ -296,7 +296,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 155.5, 143.0, 20.0, 20.0 ]
+					"patching_rect" : [ 24.5, 55.0, 20.0, 20.0 ]
 				}
 
 			}
@@ -309,7 +309,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 155.5, 196.0, 56.0, 20.0 ],
+					"patching_rect" : [ 24.5, 108.0, 56.0, 20.0 ],
 					"text" : "o.io.leap"
 				}
 
@@ -335,28 +335,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-27", 2 ],
+					"destination" : [ "obj-29", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-13", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-27", 1 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-13", 1 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-27", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-13", 0 ]
+					"source" : [ "obj-12", 0 ]
 				}
 
 			}
@@ -416,15 +398,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-13", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-2", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -434,7 +407,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-11", 0 ],
+					"destination" : [ "obj-12", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-20", 0 ]
@@ -470,10 +443,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-28", 0 ],
+					"destination" : [ "obj-34", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-27", 0 ]
+					"source" : [ "obj-29", 0 ]
 				}
 
 			}
@@ -483,6 +456,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-11", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-34", 0 ]
 				}
 
 			}
@@ -566,10 +548,6 @@
 			}
 , 			{
 				"name" : "o.pack.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "o.message.mxo",
 				"type" : "iLaX"
 			}
  ]

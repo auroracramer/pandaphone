@@ -30,6 +30,33 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-9",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 151.0, 201.0, 150.0, 20.0 ],
+					"text" : "Low bassy goodness"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"linecount" : 5,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 374.0, 74.0, 218.0, 75.0 ],
+					"text" : "Make sure that we wait to play another bass drop until 1) the bass drop is finished and 2) we are above the height threshold for playing a bass drop"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-30",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -129,7 +156,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(bang) Notify that we are above the play threshold and are ready to play another bass drop",
 					"id" : "obj-1",
 					"maxclass" : "inlet",
 					"numinlets" : 0,
@@ -155,7 +182,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(signal) Audio output",
 					"id" : "obj-36",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
@@ -166,7 +193,7 @@
 			}
 , 			{
 				"box" : 				{
-					"comment" : "",
+					"comment" : "(bang) Play a bassdrop",
 					"id" : "obj-33",
 					"maxclass" : "inlet",
 					"numinlets" : 0,
