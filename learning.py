@@ -30,7 +30,7 @@ class NoteProbabilityDistributions(object):
   between timesteps. This is basically a Markov chain that depends also on other evidence.
   """
 
-  def __init__(self, notes, k = 10):
+  def __init__(self, notes, k = 50):
     # Initialize the joint distribution between the stochastic state variabes
     # and the evidence
     self.initialize_distributions(k)
