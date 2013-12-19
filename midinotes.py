@@ -71,7 +71,6 @@ def validate_note(note):
   valid_velocity = (note.velocity < 128) and (note.velocity >= 0)
   valid_degree = (note.degree < 12) and (note.degree >= 0)
   valid_duration = (note.duration in [1,2,4,8,16,32])
-  #if (valid_pitch and valid_velocity): print True
   return (valid_pitch and valid_velocity and valid_degree and valid_duration)
 
 # for now, we will make the simplification that chords
@@ -82,6 +81,7 @@ def get_notes_from_MIDI(midi_filepath):
     pattern = midi.read_midifile(midi_filepath)
   except:
     return []
+  valid_durations = [1, 2, 4, 8, 16, 32]
   pattern.make_ticks_abs()
   ppq = pattern.resolution
 
@@ -107,6 +107,7 @@ def get_notes_from_MIDI(midi_filepath):
           start = activeNotes[event.pitch]
           end = event
           duration = int(4.0*(end.tick - start.tick)/ppq)
+          duration = min(valid_durations, key = lambda x : abs(duration - x))
           note = Note(start.tick, start.pitch, duration, start.velocity)
           if validate_note(note):
             tracks[index].append(note)
