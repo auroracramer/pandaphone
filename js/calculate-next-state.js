@@ -94,14 +94,26 @@ function list(prev_degree, prev_duration, tempo, velocity) {
     var degree_keys = Object.keys(degree_pdeg);
     var degree_prob = new Object();
 
-    for (var i = 0; i < degree_keys.length; i++) {
+	for (var i = 0; i < degree_keys.length; i++) {
         var degree = degree_keys[i];
-        var log_prob = 0.0;
-        for (var e = 0; e < degree_ev_distrs.length; e++) {
-            var ev_distr = degree_ev_distrs[e][degree_ev_vals[e]];
-            log_prob += Math.log(ev_distr[degree]);
-        }
-        degree_prob[degree] = Math.pow(Math.E, log_prob);
+        degree_prob[degree] = 1.0;
+    }
+
+	for (var e = 0; e < degree_ev_distrs.length; e++) {
+		var ev_distr = degree_ev_distrs[e][degree_ev_vals[e]];
+		var sum = 0;
+		for (var i = 0; i < degree_keys.length; i++) {
+        	var degree = degree_keys[i];
+			// Smoothing hack
+			degree_prob[degree] *= ev_distr[degree] + 0.2;
+			sum += degree_prob[degree];
+		}
+		// Normalize so things don't go to zero so quickly
+		for (var i = 0; i < degree_keys.length; i++) {
+			var degree = degree_keys[i];
+			degree_prob[degree] /= sum;
+		}
+		
     }
 
     // Calculate probability table for next duration
@@ -116,15 +128,29 @@ function list(prev_degree, prev_duration, tempo, velocity) {
     var duration_keys = Object.keys(duration_pdur);
     var duration_prob = new Object();
 
-    for (var i = 0; i < duration_keys.length; i++) {
+
+	for (var i = 0; i < duration_keys.length; i++) {
         var duration = duration_keys[i];
-        var log_prob = 0.0;
-        for (var e = 0; e < duration_ev_distrs.length; e++) {
-            var ev_distr = duration_ev_distrs[e][duration_ev_vals[e]];
-            log_prob += Math.log(ev_distr[duration]);
-        }
-        duration_prob[duration] = Math.pow(Math.E, log_prob);
+        duration_prob[duration] = 1.0;
     }
+
+	for (var e = 0; e < duration_ev_distrs.length; e++) {
+		var ev_distr = duration_ev_distrs[e][duration_ev_vals[e]];
+		var sum = 0;
+		for (var i = 0; i < duration_keys.length; i++) {
+        	var duration = duration_keys[i];
+			// Smoothing hack
+			duration_prob[duration] *= ev_distr[duration] + 0.5;
+			sum += duration_prob[duration];
+		}
+		// Normalize so things don't go to zero so quickly
+		for (var i = 0; i < duration_keys.length; i++) {
+			var duration = duration_keys[i];
+			duration_prob[duration] /= sum;
+		}
+		
+    }
+			
 
     // Calculate next state
     var next_degree = sampleDistribution(degree_prob);

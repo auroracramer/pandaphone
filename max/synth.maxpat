@@ -355,11 +355,7 @@
 								"implicit" : 1
 							}
 , 							{
-								"name" : "harmonics~.mxo",
-								"type" : "iLaX"
-							}
-, 							{
-								"name" : "OSC-route.mxo",
+								"name" : "o.route.mxo",
 								"type" : "iLaX"
 							}
 , 							{
@@ -375,11 +371,11 @@
 								"type" : "iLaX"
 							}
 , 							{
-								"name" : "o.route.mxo",
+								"name" : "harmonics~.mxo",
 								"type" : "iLaX"
 							}
 , 							{
-								"name" : "o.message.mxo",
+								"name" : "OSC-route.mxo",
 								"type" : "iLaX"
 							}
  ]
@@ -387,16 +383,16 @@
 ,
 					"patching_rect" : [ 79.227722, 165.0, 55.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"tags" : "",
-						"default_fontface" : 0,
-						"fontname" : "Arial",
-						"digest" : "",
-						"default_fontname" : "Arial",
 						"globalpatchername" : "",
 						"fontface" : 0,
-						"default_fontsize" : 12.0,
 						"fontsize" : 12.0,
-						"description" : ""
+						"default_fontface" : 0,
+						"tags" : "",
+						"digest" : "",
+						"default_fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"description" : "",
+						"fontname" : "Arial"
 					}
 ,
 					"text" : "p synths"
@@ -606,16 +602,16 @@
 ,
 					"patching_rect" : [ 730.0, 208.0, 70.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"tags" : "",
-						"default_fontface" : 0,
-						"fontname" : "Arial",
-						"digest" : "",
-						"default_fontname" : "Arial",
 						"globalpatchername" : "",
 						"fontface" : 0,
-						"default_fontsize" : 12.0,
 						"fontsize" : 12.0,
-						"description" : ""
+						"default_fontface" : 0,
+						"tags" : "",
+						"digest" : "",
+						"default_fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"description" : "",
+						"fontname" : "Arial"
 					}
 ,
 					"text" : "p bassdrop"
@@ -896,16 +892,16 @@
 ,
 					"patching_rect" : [ 515.0, 208.0, 57.0, 20.0 ],
 					"saved_object_attributes" : 					{
-						"tags" : "",
-						"default_fontface" : 0,
-						"fontname" : "Arial",
-						"digest" : "",
-						"default_fontname" : "Arial",
 						"globalpatchername" : "",
 						"fontface" : 0,
-						"default_fontsize" : 12.0,
 						"fontsize" : 12.0,
-						"description" : ""
+						"default_fontface" : 0,
+						"tags" : "",
+						"digest" : "",
+						"default_fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"description" : "",
+						"fontname" : "Arial"
 					}
 ,
 					"text" : "p whistle"
@@ -1059,8 +1055,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "FullPacket" ],
-					"patching_rect" : [ 79.227722, 55.0, 371.0, 20.0 ],
-					"text" : "o.expr /noteDuration = 4. * 48000. / ( /duration * /binnedTempo * 30)"
+					"patching_rect" : [ 79.227722, 55.0, 446.0, 20.0 ],
+					"text" : "o.expr /noteDuration = 4. * 48000. / (( log( /duration ) / 8 + 1) * /binnedTempo * 30)"
 				}
 
 			}
@@ -1483,14 +1479,6 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "harmonics~.mxo",
-				"type" : "iLaX"
-			}
-, 			{
-				"name" : "OSC-route.mxo",
-				"type" : "iLaX"
-			}
-, 			{
 				"name" : "o.union.mxo",
 				"type" : "iLaX"
 			}
@@ -1499,7 +1487,11 @@
 				"type" : "iLaX"
 			}
 , 			{
-				"name" : "o.message.mxo",
+				"name" : "harmonics~.mxo",
+				"type" : "iLaX"
+			}
+, 			{
+				"name" : "OSC-route.mxo",
 				"type" : "iLaX"
 			}
  ]
