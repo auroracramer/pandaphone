@@ -22,7 +22,7 @@ def listMIDIFiles(directory):
 
 def learn(directory, outputFilepath):
   print "Gathering all MIDI files..."
-  files = listMIDIFiles(directory)[:100]
+  files = listMIDIFiles(directory)[:2000]
   print "Processing MIDI files..."
   notes = process_files(files)
   print "Learning from data..."
